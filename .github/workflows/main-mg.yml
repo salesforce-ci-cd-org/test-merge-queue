@@ -2,7 +2,7 @@ name: Main Merge Group Workflow
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 on:
   merge_group:
