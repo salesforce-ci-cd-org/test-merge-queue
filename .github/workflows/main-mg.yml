@@ -9,8 +9,8 @@ on:
     branches: main
 
 jobs:
-    validate:
+    deploy:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v4
-            - run: echo "Validating..."
+            - run: echo "Deploying..."
