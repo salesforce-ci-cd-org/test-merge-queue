@@ -30,6 +30,7 @@ jobs:
 
   dependent:
     runs-on: ubuntu-latest
+    needs: preview
     environment:
       name: preview-${{ github.event.pull_request.number }}
     steps:
