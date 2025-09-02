@@ -16,6 +16,4 @@ jobs:
       name: preview-${{ github.event.pull_request.number }}
       url: https://preview-${{ github.event.pull_request.number }}.example.com
     steps:
-        - uses: actions/checkout@v4
-        - name: "Display URL"
-          run: echo "Preview URL: https://preview-${{ github.event.pull_request.number }}.example.com"
+      - uses: actions/checkout@v4
