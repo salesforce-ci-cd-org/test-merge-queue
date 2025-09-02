@@ -1,4 +1,4 @@
-name: Main Merge Group Workflow
+name: Main PR/MG Workflow
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
