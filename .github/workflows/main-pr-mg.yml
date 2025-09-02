@@ -1,7 +1,7 @@
 name: Main Merge Group Workflow
 
 concurrency:
-  group: ${{ github.workflow }}
+  group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: false
 
 on:
@@ -18,15 +18,16 @@ jobs:
           - run: echo "Validating..."
           
     deploy-to-staging:
+        concurrency: ${{ github.job }}
         if: ${{ github.event_name == 'merge_group' }}
         environment: Staging
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v4
             - run: echo "Deploying..."
-            - run: exit 1
 
     deploy-to-production:
+        concurrency: ${{ github.job }}
         if: ${{ github.event_name == 'merge_group' }}
         environment: Production
         needs: deploy-to-staging
