@@ -1,7 +1,7 @@
 name: Main PR Workflow
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
+  group: ${{ github.workflow }}
   cancel-in-progress: false
 
 on:
