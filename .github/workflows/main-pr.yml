@@ -18,14 +18,34 @@ jobs:
       url: https://preview-${{ github.event.pull_request.number }}.example.com
     steps:
       - uses: actions/checkout@v4
-      - run: openssl rand -hex 16
+
+      - name: Generate token
+        run: echo "TOKEN=$(openssl rand -hex 16)" > token.env
+
+      - name: Save token to cache
+        uses: actions/cache/save@v4
+        with:
+          path: token.env
+          key: preview-${{ github.event.pull_request.number }}
 
   dependent:
     runs-on: ubuntu-latest
     environment:
       name: preview-${{ github.event.pull_request.number }}
     steps:
-      - run: echo "Some dependent step..."
+      - name: Restore token
+        id: cache
+        uses: actions/cache/restore@v4
+        with:
+          path: token.env
+          key: preview-${{ github.event.pull_request.number }}
+
+      - name: Load token
+        if: steps.cache.outputs.cache-hit == 'true'
+        run: source token.env
+
+      - name: Use token
+        run: echo "Token is $TOKEN"
 
   destroy:
     if: github.event.action == 'closed'
