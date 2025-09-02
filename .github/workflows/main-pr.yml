@@ -15,6 +15,8 @@ jobs:
     environment:
       name: preview-${{ github.event.pull_request.number }}
       url: https://preview-${{ github.event.pull_request.number }}.example.com
+    env:
+      GH_TOKEN: ${{ github.token }}
     steps:
       - uses: actions/checkout@v4
       - run: openssl rand -hex 16 | gh secret set SOME_COOL_USERNAME --env preview-${{ github.event.pull_request.number }}
