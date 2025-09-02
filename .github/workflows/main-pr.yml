@@ -1,0 +1,14 @@
+name: Main PR Workflow
+
+on:
+  pull_request:
+    branches: main
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  preview:
+    environment:
+      name: preview-${{ github.event.pull_request.number }}
