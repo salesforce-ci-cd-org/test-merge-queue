@@ -18,3 +18,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: openssl rand -hex 16
+
+  dependent:
+    runs-on: ubuntu-latest
+    environment:
+      name: preview-${{ github.event.pull_request.number }}
+    steps:
+      - run: echo "Some dependent step..."
+
+  destroy:
+    if: github.event.action == 'closed'
+    runs-on: ubuntu-latest
+    environment:
+      name: preview-${{ github.event.pull_request.number }}
+    steps:
+      - uses: actions/checkout@v4
+      -  run: echo "Destroying..."
