@@ -1,13 +1,13 @@
 name: Main PR Workflow
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
 on:
   pull_request:
     branches:
       - main
-
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: false
 
 jobs:
   preview:
@@ -16,4 +16,6 @@ jobs:
       name: preview-${{ github.event.pull_request.number }}
       url: https://preview-${{ github.event.pull_request.number }}.example.com
     steps:
-      - run: echo "Preview URL: https://preview-${{ github.event.pull_request.number }}.example.com"
+        - uses: actions/checkout@v4
+        - name: "Display URL"
+          run: echo "Preview URL: https://preview-${{ github.event.pull_request.number }}.example.com"
