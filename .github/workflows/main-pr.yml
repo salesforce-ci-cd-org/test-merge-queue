@@ -2,7 +2,8 @@ name: Main PR Workflow
 
 on:
   pull_request:
-    branches: main
+    branches:
+      - main
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -13,5 +14,6 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: preview-${{ github.event.pull_request.number }}
+      url: https://preview-${{ github.event.pull_request.number }}.example.com
     steps:
       - run: echo "Preview URL: https://preview-${{ github.event.pull_request.number }}.example.com"
