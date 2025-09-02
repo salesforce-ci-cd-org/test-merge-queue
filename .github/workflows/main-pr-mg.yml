@@ -18,7 +18,7 @@ jobs:
           - run: echo "Validating..."
           
     deploy-to-staging:
-        concurrency: ${{ github.job }}
+        concurrency: deploy-to-staging
         if: ${{ github.event_name == 'merge_group' }}
         environment: Staging
         runs-on: ubuntu-latest
@@ -27,7 +27,7 @@ jobs:
             - run: echo "Deploying..."
 
     deploy-to-production:
-        concurrency: ${{ github.job }}
+        concurrency: deploy-to-production
         if: ${{ github.event_name == 'merge_group' }}
         environment: Production
         needs: deploy-to-staging
