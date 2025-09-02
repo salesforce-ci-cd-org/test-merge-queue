@@ -13,3 +13,5 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: preview-${{ github.event.pull_request.number }}
+    steps:
+      - run: echo "Preview URL: https://preview-${{ github.event.pull_request.number }}.example.com"
