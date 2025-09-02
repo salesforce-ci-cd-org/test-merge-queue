@@ -10,5 +10,6 @@ concurrency:
 
 jobs:
   preview:
+    runs-on: ubuntu-latest
     environment:
       name: preview-${{ github.event.pull_request.number }}
