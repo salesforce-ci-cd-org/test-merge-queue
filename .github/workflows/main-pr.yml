@@ -17,3 +17,4 @@ jobs:
       url: https://preview-${{ github.event.pull_request.number }}.example.com
     steps:
       - uses: actions/checkout@v4
+      - run: openssl rand -hex 16
