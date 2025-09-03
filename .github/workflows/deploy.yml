@@ -1,0 +1,19 @@
+name: Deploy To Environment Workflow
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'The environment to deploy to'
+        required: true
+
+jobs:
+  deploy:
+    environment: ${{ inputs.environment }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy to environment
+        run: echo "Deploying to ${{ inputs.environment }}"
