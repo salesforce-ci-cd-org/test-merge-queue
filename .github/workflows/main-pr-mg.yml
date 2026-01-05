@@ -11,27 +11,7 @@ on:
     branches: main
 
 jobs:
-    validate:
-      runs-on: ubuntu-latest
-      steps:
-          - uses: actions/checkout@v4
-          - run: echo "Validating..."
-          
-    deploy-to-staging:
-        concurrency: deploy-to-staging
-        if: ${{ github.event_name == 'merge_group' }}
-        environment: Staging
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v4
-            - run: echo "Deploying..."
-
-    deploy-to-production:
-        concurrency: deploy-to-production
-        if: ${{ github.event_name == 'merge_group' }}
-        environment: Production
-        needs: deploy-to-staging
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v4
-            - run: echo "Deploying..."
+    call-reusable-workflow:
+      uses: ./.github/workflows/reusable-pr-mr.yml
+      with:
+        github_event_name: ${{ github.event_name }}
