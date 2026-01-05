@@ -12,7 +12,6 @@ on:
 
 jobs:
     call-reusable-workflow:
-      if: ${{ github.event_name == 'merge_group' }}
       uses: ./.github/workflows/reusable-pr-mr.yml
       with:
         github_event_name: ${{ github.event_name }}
